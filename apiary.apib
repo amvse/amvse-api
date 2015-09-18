@@ -13,7 +13,7 @@ All requests should be sent to `https://api.amvse.com/v1` followed by the endpoi
 
 All Amvse API requests must be authenticated using HTTP Basic Auth.
 
-Once you've acquired an API token, you should user HTTP Basic Auth with your Amvse email address as the `username` and your API token as the `password`.
+Once you've acquired an API token, you should user HTTP Basic Auth with a blank `username` and your API token as the `password`.
 
 ## API Token [/sessions]
 
@@ -40,7 +40,7 @@ Generate a new API Token to authenticate your Amvse API requests.
 
 ## Websites [/websites]
 
-**Authentication Required**: HTTP Basic Auth `$EMAIL_ADDRESS:$API_TOKEN`
+**Authentication Required**: HTTP Basic Auth `:$API_TOKEN`
 
 ### List All Websites [GET]
 
