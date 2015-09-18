@@ -1,32 +1,46 @@
 FORMAT: 1A
-HOST: https://api.amvse.com/
+HOST: https://api.amvse.com/v1
 
 # Amvse
 
 This is the API for Amvse. It's pretty basic for now, but you have to use it to manage your Amvse websites.
 
-## Authentication [/sessions]
+This documentation covers `v1` of this API. Do note the `/v1` URL prefix.
 
-### Create New Session [POST]
+All requests should be sent to `https://api.amvse.com/v1` followed by the endpoint you'd like to use.
 
-Before you can use the Amvse API, you need to login. When you login, you'll receive an API token to authenticate your requests.
+# Group Authentication
+
+All Amvse API requests must be authenticated using HTTP Basic Auth.
+
+Once you've acquired an API token, you should user HTTP Basic Auth with your Amvse email address as the `username` and your API token as the `password`.
+
+## API Token [/sessions]
+
+*This endpoint does not require HTTP Basic Auth.*
+
+### Generate API Token [POST]
+
+Generate a new API Token to authenticate your Amvse API requests.
 
 + Request (application/json)
 
         {
-            "username": "YOUR@EMAIL-PROVIDER.COM",
-            "password": "YOUR_SECRET_PASSWORD"
+            "username": "hello@amvse.com",
+            "password": "SUP3R_SECRET_PASSWORD"
         }
 
 + Response 200 (application/json)
 
         {
-            "token": "YOUR_API_TOKEN"
+            "token": "SECRET_API_TOKEN"
         }
 
 
 
 ## Websites [/websites]
+
+**Authentication Required**: HTTP Basic Auth `$EMAIL_ADDRESS:$API_TOKEN`
 
 ### List All Websites [GET]
 
@@ -34,22 +48,9 @@ Before you can use the Amvse API, you need to login. When you login, you'll rece
 
         [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
+                "realtime_channel_name": "__amvse_Website_1",
+                "id": 1,
+                "domain_name": "hippota.co",
+                "updated_at": "2015-09-14T20:00:40.996-07:00"
             }
         ]
