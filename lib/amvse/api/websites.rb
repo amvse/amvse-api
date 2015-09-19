@@ -5,7 +5,7 @@ module Amvse
     def initialize(attributes={})
       self.id = attributes['id']
       self.domain_name = attributes['domain_name']
-      self.releases = attributes['releases'].map{|release_json| Amvse::Release.new(release_json) } || []
+      self.releases = (attributes['releases'] || []).map{|release_json| Amvse::Release.new(release_json) }
       self.current_release_id = attributes['current_release_id']
     end
     

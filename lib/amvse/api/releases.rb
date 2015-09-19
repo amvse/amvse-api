@@ -5,7 +5,7 @@ module Amvse
     def initialize(attributes={})
       self.id = attributes['id']
       self.website_id = attributes['website_id']
-      self.files = attributes['files'].map{|file_json| Amvse::File.new(file_json) } || []
+      self.files = (attributes['files'] || []).map{|file_json| Amvse::File.new(file_json) }
     end
     
     def serialize

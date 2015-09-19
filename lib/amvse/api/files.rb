@@ -3,13 +3,13 @@ module Amvse
     attr_accessor :id, :website_id, :release_id, :md5, :bytes, :path, :s3_form_data
     
     def initialize(attributes={})
-      self.id = attributes[:id]
-      self.website_id = attributes[:website_id]
-      self.release_id = attributes[:release_id]
-      self.md5 = attributes[:md5]
-      self.bytes = attributes[:bytes]
-      self.path = attributes[:path]
-      self.s3_form_data = attributes[:s3_form_data]
+      self.id = attributes['id']
+      self.website_id = attributes['website_id']
+      self.release_id = attributes['release_id']
+      self.md5 = attributes['md5']
+      self.bytes = attributes['bytes']
+      self.path = attributes['path']
+      self.s3_form_data = attributes['s3_form_data']
     end
     
     def serialize
