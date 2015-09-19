@@ -1,5 +1,5 @@
 module Amvse
-  class ReleaseFile
+  class File
     attr_accessor :id, :website_id, :release_id, :md5, :bytes, :path, :s3_form_data
     
     def initialize(attributes={})
@@ -14,12 +14,12 @@ module Amvse
     
     def serialize
       {
-        id: self.id,
-        website_id: self.website_id,
-        release_id: self.release_id,
-        md5: self.md5,
-        bytes: self.bytes,
-        path: self.path
+        'id': self.id,
+        'website_id': self.website_id,
+        'release_id': self.release_id,
+        'md5': self.md5,
+        'bytes': self.bytes,
+        'path': self.path
       }
     end
     

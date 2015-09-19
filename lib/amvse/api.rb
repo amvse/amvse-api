@@ -15,6 +15,8 @@ require "amvse/api/errors"
 require "amvse/api/mock"
 require "amvse/api/version"
 
+require "amvse/api/files"
+require "amvse/api/releases"
 require "amvse/api/sessions"
 require "amvse/api/websites"
 
@@ -109,10 +111,6 @@ module Amvse
     def decompress_response!(response)
       return unless response.headers['Content-Encoding'] == 'gzip'
       response.body = Zlib::GzipReader.new(StringIO.new(response.body)).read
-    end
-
-    def website_params(params)
-      params
     end
 
     def escape(string)
