@@ -1,33 +1,52 @@
 module Amvse
+  class Website
+    attr_accessor :id, :domain_name, :releases, :current_release_id
+    
+    def initialize(attributes={})
+      self.id = attributes[:id]
+      self.domain_name = attributes[:domain_name]
+      self.releases = attributes[:releases].map{|release_json| Release.new(release_json) } || []
+      self.current_release_id = attributes[:current_release_id]
+    end
+    
+    def serialize
+      data = { id: self.id, domain_name: self.domain_name, current_release_id: self.current_release_id, releases: [] }
+      data[:releases] = self.releases.map{|release| release.serialize }
+      data
+    end
+    
+  end
+  
   class API
 
-    # GET /websites
     def get_websites
-      request(
+      json_string = request(
         :expects  => 200,
         :method   => :get,
         :path     => "/v1/websites"
       ).body
+      MultiJson.load(json_string).symbolize_keys.map do |website_object|
+        Website.new website_object
+      end
     end
-
-    # POST /websites
-    def post_websites(params={})
-      request(
-        :expects  => 201,
-        :method   => :post,
-        :path     => '/v1/websites',
-        :body     => website_params(params)
+    
+    def get_website(id)
+      json_string = request(
+        :expects  => 200,
+        :method   => :get,
+        :path     => "/v1/websites/#{id}"
       ).body
+      Website.new MultiJson.load(json_string).symbolize_keys
     end
 
-    # PUT /websites/:website_id
-    def put_website(website_id, params)
-      request(
+    def put_website(id, website_params)
+      json_string = request(
         :expects  => 200,
         :method   => :put,
-        :path     => "/v1/websites/#{website_id}",
-        :body     => website_params(params)
+        :path     => "/v1/websites/#{id}",
+        :body     => MultiJson.dump({website: website_params})
       ).body
+      Website.new MultiJson.load(json_string).symbolize_keys
     end
 
   end
