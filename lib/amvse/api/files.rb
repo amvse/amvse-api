@@ -28,7 +28,6 @@ module Amvse
     
     def upload!(file_path=nil)
       file_path ||= self.file_path
-      file_path = "/Users/zcs/Downloads/untitled.txt"
       s3_connection = Excon.new(self.s3_url)
       boundary = (0...40).map { ('a'..'z').to_a[rand(26)] }.join
       
@@ -46,6 +45,7 @@ module Amvse
       mime_type = 'text/plain' # TODO: use file to calculate this
       body << "Content-Type: #{mime_type}" << Excon::CR_NL
       body << Excon::CR_NL
+      puts "file_path: #{file_path}"
       body << IO.read(file_path)
       body << Excon::CR_NL
       body << "--#{boundary}--"
