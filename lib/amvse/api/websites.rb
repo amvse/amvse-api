@@ -10,9 +10,12 @@ module Amvse
     end
     
     def serialize
-      data = { 'id': self.id, 'domain_name': self.domain_name, 'current_release_id': self.current_release_id, 'releases': [] }
-      data['releases'] = self.releases.map{|release| release.serialize }
-      data
+      {
+        'id': self.id,
+        'domain_name': self.domain_name,
+        'current_release_id': self.current_release_id,
+        'releases': self.releases.map{|release| release.serialize }
+      }
     end
     
   end

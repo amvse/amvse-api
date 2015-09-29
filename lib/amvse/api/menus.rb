@@ -11,16 +11,13 @@ module Amvse
     end
     
     def serialize
-      data = {
+      {
         'id': self.id,
         'name': self.name,
         'updated_at': self.updated_at,
-        'categories': [],
-        'open_windows': []
+        'categories': self.categories.map{|category| category.serialize },
+        'open_windows': self.open_windows.map{|open_window| open_window.serialize }
       }
-      data['categories'] = self.categories.map{|category| category.serialize }
-      data['open_windows'] = self.open_windows.map{|open_window| open_window.serialize }
-      data
     end
     
   end

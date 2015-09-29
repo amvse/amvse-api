@@ -9,9 +9,11 @@ module Amvse
     end
     
     def serialize
-      data = { 'id': self.id, 'website_id': self.website_id, 'files': [] }
-      data['files'] = self.files.map{|file| file.serialize }
-      data
+      { 
+        'id': self.id,
+        'website_id': self.website_id,
+        'files': self.files.map{|file| file.serialize }
+      }
     end
     
   end

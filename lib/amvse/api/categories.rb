@@ -10,14 +10,12 @@ module Amvse
     end
     
     def serialize
-      data = {
+      {
         'id': self.id,
         'name': self.name,
         'updated_at': self.updated_at,
-        'items': []
+        'items': self.items.map{|item| item.serialize }
       }
-      data['items'] = self.items.map{|item| item.serialize }
-      data
     end
     
   end

@@ -55,7 +55,7 @@ module Amvse
     end
     
     def serialize
-      data = {
+      {
         'id': self.id,
         'name': self.name,
         'updated_at': self.updated_at,
@@ -96,12 +96,9 @@ module Amvse
         'meals': self.meals,
         'music': self.music,
         'smoking_type': self.smoking_type,
-        'menus': [],
-        'open_windows': []
+        'menus': self.menus.map{|menu| menu.serialize },
+        'open_windows': self.open_windows.map{|open_window| open_window.serialize }
       }
-      data['menus'] = self.menus.map{|menu| menu.serialize }
-      data['open_windows'] = self.open_windows.map{|open_window| open_window.serialize }
-      data
     end
     
   end
